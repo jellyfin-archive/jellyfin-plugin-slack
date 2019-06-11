@@ -1,0 +1,16 @@
+---
+name: "jellyfin-plugin-slack"
+guid: "de228f12-e43e-4bd9-9fc0-2830819c3b92"
+version: "1" # Please increment with each pull request
+jellyfin_version: "10.3.0" # The earliest binary-compatible version
+nicename: "Slack Notifications"
+description: "Jellyfin Slack notification plugin"
+overview: >
+  Get notifications via Slack.
+category: "Notifications"
+owner: "jellyfin"
+artifacts:
+  - "Jellyfin.Plugin.Slack.dll"
+build_type: "dotnet"
+dotnet_configuration: "Release"
+dotnet_framework: "netstandard2.0"
