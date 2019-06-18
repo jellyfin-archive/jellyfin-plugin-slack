@@ -7,6 +7,7 @@ using MediaBrowser.Common.Net;
 using MediaBrowser.Model.Serialization;
 using MediaBrowser.Model.Services;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 
 namespace Jellyfin.Plugin.Slack.Api
 {
@@ -49,7 +50,7 @@ namespace Jellyfin.Plugin.Slack.Api
             {
                 Url = options.WebHookUrl,
                 RequestContent = _serializer.SerializeToString(parameters),
-                RequestHeaders = {["Content-type"] = "application/json"}
+                RequestHeaders = {[HeaderNames.ContentType] = "application/json"}
             };
 
             await _httpClient.Post(httpRequest).ConfigureAwait(false);
