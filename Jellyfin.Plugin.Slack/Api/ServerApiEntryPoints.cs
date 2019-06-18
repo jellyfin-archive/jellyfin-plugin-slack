@@ -22,8 +22,7 @@ namespace Jellyfin.Plugin.Slack.Api
         private readonly IHttpClient _httpClient;
         private readonly ILogger _logger;
         private readonly IJsonSerializer _serializer;
- 
-
+        
         public ServerApiEndpoints(ILogger logger, IHttpClient httpClient, IJsonSerializer serializer)
         {
               _logger = logger;
@@ -34,16 +33,10 @@ namespace Jellyfin.Plugin.Slack.Api
         private SlackConfiguration GetOptions(String userID)
         {
             return Plugin.Instance.Configuration.Options
-                .FirstOrDefault(i => string.Equals(i.MediaBrowserUserId, userID, StringComparison.OrdinalIgnoreCase));
+                .FirstOrDefault(i => string.Equals(i.JellyfinUserId, userID, StringComparison.OrdinalIgnoreCase));
         }
 
-        public void Post(TestNotification request)
-        {
-            var task = PostAsync(request);
-            Task.WaitAll(task);
-        }
-
-        public async Task PostAsync(TestNotification request)
+        public async Task Post(TestNotification request)
         {
             var options = GetOptions(request.UserID);
 
@@ -52,13 +45,13 @@ namespace Jellyfin.Plugin.Slack.Api
                 {"text", "This is a test notification from Jellyfin"}
             };
 
-            var httpRequest = new HttpRequestOptions()
+            var httpRequest = new HttpRequestOptions
             {
                 Url = options.WebHookUrl,
-                RequestContent = _serializer.SerializeToString(parameters)
+                RequestContent = _serializer.SerializeToString(parameters),
+                RequestHeaders = {["Content-type"] = "application/json"}
             };
 
-            httpRequest.RequestHeaders["Content-type"] = "application/json";
             await _httpClient.Post(httpRequest).ConfigureAwait(false);
         }
     }

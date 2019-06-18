@@ -18,10 +18,7 @@
 
   <ItemGroup>
     <PackageReference Include="Jellyfin.Controller" Version="10.*" />
+    <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.2.0" />
   </ItemGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="xcopy &quot;$(TargetPath)&quot; &quot;C:\Users\Felix\AppData\Local\jellyfin\plugins\Slack&quot; /y" />
-  </Target>
 
 </Project>

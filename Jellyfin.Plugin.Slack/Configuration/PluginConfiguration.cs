@@ -10,6 +10,5 @@ namespace Jellyfin.Plugin.Slack.Configuration
         {
             Options = new SlackConfiguration[] { };
         }
-
     }
 }

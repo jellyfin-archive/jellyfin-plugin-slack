@@ -18,9 +18,8 @@ namespace Jellyfin.Plugin.Slack
 
         public override string Name => "Slack Notifications";
 
-        public IEnumerable<PluginPageInfo> GetPages()
-        {
-            return new[]
+        public IEnumerable<PluginPageInfo> GetPages() =>
+            new[]
             {
                 new PluginPageInfo
                 {
@@ -28,15 +27,8 @@ namespace Jellyfin.Plugin.Slack
                     EmbeddedResourcePath = GetType().Namespace + ".Configuration.config.html"
                 }
             };
-        }
 
-        public override string Description
-        {
-            get
-            {
-                return "Sends notifications to Slack.";
-            }
-        }
+        public override string Description => "Sends notifications to Slack.";
 
         private readonly Guid _id = new Guid("94FB77C3-55AD-4C50-BF4E-4E5497467B79");
         public override Guid Id => _id;
