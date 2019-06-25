@@ -1,7 +1,7 @@
 ---
 name: "jellyfin-plugin-slack"
-guid: "de228f12-e43e-4bd9-9fc0-2830819c3b92"
-version: "1" # Please increment with each pull request
+guid: "94fb77c3-55ad-4c50-bf4e-4e5497467b79"
+version: "2" # Please increment with each pull request
 jellyfin_version: "10.3.0" # The earliest binary-compatible version
 nicename: "Slack Notifications"
 description: "Jellyfin Slack notification plugin"
