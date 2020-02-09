@@ -50,6 +50,7 @@ namespace Jellyfin.Plugin.Slack.Api
             {
                 Url = options.WebHookUrl,
                 RequestContent = _serializer.SerializeToString(parameters),
+                RequestContentType = "application/json",
             };
 
             await _httpClient.Post(httpRequest).ConfigureAwait(false);
