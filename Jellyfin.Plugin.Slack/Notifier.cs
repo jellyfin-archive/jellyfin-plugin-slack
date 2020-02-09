@@ -48,12 +48,21 @@ namespace Jellyfin.Plugin.Slack
                 {
                     {"text", $"{request.Name} \n {request.Description}"},
                 };
+            if (!string.IsNullOrEmpty(options.Username))
+            {
+                parameters.Add("username", options.Username);
+            }
+            if (!string.IsNullOrEmpty(options.IconUrl))
+            {
+                parameters.Add("icon_url", options.IconUrl);
+            }
 
             _logger.LogDebug("Notification to Slack : {0} - {1}", options.WebHookUrl, request.Description);
             var httpRequest = new HttpRequestOptions
             {
                 Url = options.WebHookUrl,
                 RequestContent = _serializer.SerializeToString(parameters),
+                RequestContentType = "application/json",
             };
 
             await _httpClient.Post(httpRequest).ConfigureAwait(false);
