@@ -23,6 +23,18 @@
                             Webhook-URL for Jellyfin
                         </div>
                     </div>
+                    <div class="inputContainer">
+                        <input is="emby-input" type="text" id="txtSlackWebhookUsername" label="Webhook display name:"/>
+                        <div class="fieldDescription">
+                            Optional display name to use for notifications
+                        </div>
+                    </div>
+                    <div class="inputContainer">
+                        <input is="emby-input" type="text" id="txtSlackWebhookIconUrl" label="Webhook icon URL:"/>
+                        <div class="fieldDescription">
+                            Optional icon URL to use for notifications
+                        </div>
+                    </div>
                     <div>
                         <button is="emby-button" type="button" class="raised button-cancel block" id="testNotification">
                             <span>Test Notification</span>
@@ -48,6 +60,8 @@
 
                         $('#chkEnableSlack', page).checked(slackConfig.IsEnabled || false).checkboxradio("refresh");
                         $('#txtSlackWebhookUrl', page).val(slackConfig.WebHookUrl || '');
+                        $('#txtSlackWebhookUsername', page).val(slackConfig.Username || '');
+                        $('#txtSlackWebhookIconUrl', page).val(slackConfig.IconUrl || '');
                     });
                     Dashboard.hideLoadingMsg();
                 }
@@ -112,6 +126,8 @@
                         slackConfig.JellyfinUserId = userId;
                         slackConfig.IsEnabled = $('#chkEnableSlack', form).checked();
                         slackConfig.WebHookUrl = $('#txtSlackWebhookUrl', form).val();
+                        slackConfig.Username = $('#txtSlackWebhookUsername', form).val();
+                        slackConfig.IconUrl = $('#txtSlackWebhookIconUrl', form).val();
                         ApiClient.updatePluginConfiguration(pluginId, config).then(Dashboard.processPluginConfigurationUpdateResult);
                     });
                     return false;
