@@ -15,7 +15,7 @@ This plugin enables the sending of messages / notifications to a range of person
 dotnet publish --configuration Release --output bin
 ```
 
-4. Place the resulting `Jellyfin.Plugin.Reports.dll` file in a folder called `plugins/` inside your Jellyfin data directory.
+4. Place the resulting `Jellyfin.Plugin.Slack.dll` file in a folder called `plugins/` inside your Jellyfin data directory.
 
 ### Screenshot
 
