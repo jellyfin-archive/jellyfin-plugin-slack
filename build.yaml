@@ -1,8 +1,8 @@
 ---
 name: "jellyfin-plugin-slack"
 guid: "94fb77c3-55ad-4c50-bf4e-4e5497467b79"
-version: "4"
-jellyfin_version: "10.3.7"
+version: "5"
+jellyfin_version: "10.5.0"
 nicename: "Slack Notifications"
 description: "Get notifications via Slack"
 overview: >
@@ -13,4 +13,4 @@ artifacts:
   - "Jellyfin.Plugin.Slack.dll"
 build_type: "dotnet"
 dotnet_configuration: "Release"
-dotnet_framework: "netstandard2.0"
+dotnet_framework: "netstandard2.1"
