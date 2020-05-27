@@ -8,7 +8,9 @@ This plugin can send notifications to a range of personal devices via <a href="h
 ## Build & Installation Process
 
 1. Clone this repository
+
 2. Ensure you have .NET Core SDK set up and installed
+
 3. Build the plugin with your favorite IDE or the `dotnet` command.
 
 ```sh
