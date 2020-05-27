@@ -59,7 +59,7 @@
                             return userId === c.JellyfinUserId;
                         })[0] || {};
 
-                        $('#chkEnableSlack', page).checked(slackConfig.IsEnabled || false).checkboxradio("refresh");
+                        $('#chkEnableSlack', page).checked = slackConfig.IsEnabled || false;
                         $('#txtSlackWebhookUrl', page).val(slackConfig.WebHookUrl || '');
                         $('#txtSlackWebhookUsername', page).val(slackConfig.Username || '');
                         $('#txtSlackWebhookIconUrl', page).val(slackConfig.IconUrl || '');
@@ -130,7 +130,7 @@
                         }
 
                         slackConfig.JellyfinUserId = userId;
-                        slackConfig.IsEnabled = $('#chkEnableSlack', form).checked();
+                        slackConfig.IsEnabled = $('#chkEnableSlack', form).checked;
                         slackConfig.WebHookUrl = $('#txtSlackWebhookUrl', form).val();
                         slackConfig.Username = $('#txtSlackWebhookUsername', form).val();
                         slackConfig.IconUrl = $('#txtSlackWebhookIconUrl', form).val();
