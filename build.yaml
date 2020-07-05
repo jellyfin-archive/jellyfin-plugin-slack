@@ -1,8 +1,8 @@
 ---
 name: "Slack Notifications"
 guid: "94fb77c3-55ad-4c50-bf4e-4e5497467b79"
-version: "5.0.0.0"
-targetAbi: "10.5.0.0"
+version: "6.0.0.0"
+targetAbi: "10.6.0.0"
 overview: "Get notifications via Slack"
 description: >
   Get notifications via Slack.
