@@ -21,10 +21,10 @@ namespace Jellyfin.Plugin.Slack.Api
     public class ServerApiEndpoints : IService
     {
         private readonly IHttpClient _httpClient;
-        private readonly ILogger _logger;
+        private readonly ILogger<ServerApiEndpoints> _logger;
         private readonly IJsonSerializer _serializer;
         
-        public ServerApiEndpoints(ILogger logger, IHttpClient httpClient, IJsonSerializer serializer)
+        public ServerApiEndpoints(ILogger<ServerApiEndpoints> logger, IHttpClient httpClient, IJsonSerializer serializer)
         {
               _logger = logger;
               _httpClient = httpClient;

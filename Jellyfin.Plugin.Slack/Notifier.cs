@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Jellyfin.Plugin.Slack.Configuration;
+using Jellyfin.Data.Entities;
 using MediaBrowser.Common.Net;
 using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Notifications;
@@ -15,11 +16,11 @@ namespace Jellyfin.Plugin.Slack
 {
     public class Notifier : INotificationService
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<Notifier> _logger;
         private readonly IHttpClient _httpClient;
         private readonly IJsonSerializer _serializer;
 
-        public Notifier(ILogger logger, IHttpClient httpClient, IJsonSerializer serializer)
+        public Notifier(ILogger<Notifier> logger, IHttpClient httpClient, IJsonSerializer serializer)
         {
             _logger = logger;
             _httpClient = httpClient;
