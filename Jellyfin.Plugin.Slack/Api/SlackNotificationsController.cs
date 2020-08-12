@@ -14,13 +14,13 @@ namespace Jellyfin.Plugin.Slack.Api
     [ApiController]
     [Route("Notification/Slack")]
     [Produces(MediaTypeNames.Application.Json)]
-    public class NotificationsController : ControllerBase
+    public class SlackNotificationsController : ControllerBase
     {
         private readonly IHttpClient _httpClient;
-        private readonly ILogger<NotificationsController> _logger;
+        private readonly ILogger<SlackNotificationsController> _logger;
         private readonly IJsonSerializer _serializer;
         
-        public NotificationsController(ILogger<NotificationsController> logger, IHttpClient httpClient, IJsonSerializer serializer)
+        public SlackNotificationsController(ILogger<SlackNotificationsController> logger, IHttpClient httpClient, IJsonSerializer serializer)
         {
               _logger = logger;
               _httpClient = httpClient;
@@ -30,12 +30,12 @@ namespace Jellyfin.Plugin.Slack.Api
         /// <summary>
         /// Sends a slack notification to test the configuration.
         /// </summary>
-        /// <param name="userId">The user id of the jellyfin user.</param>
+        /// <param name="userId">The user id of the Jellyfin user.</param>
         /// <response code="204">Notification sent successfully.</response>
         /// <returns>A <see cref="NoContentResult"/> indicating success.</returns>
         [HttpPost("Test/{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<ActionResult> SendTestNotification([FromRoute] string userId)
+        public async Task<ActionResult> SendSlackTestNotification([FromRoute] string userId)
         {
             var options = Plugin.Instance.Configuration.Options
                 .FirstOrDefault(i => string.Equals(i.JellyfinUserId, userId, StringComparison.OrdinalIgnoreCase));
