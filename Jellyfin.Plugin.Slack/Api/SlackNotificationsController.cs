@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
 using System.Net.Mime;
+using System.Text.Json;
 using System.Threading.Tasks;
+using MediaBrowser.Common.Json;
 using MediaBrowser.Common.Net;
-using MediaBrowser.Model.Serialization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,15 +19,16 @@ namespace Jellyfin.Plugin.Slack.Api
     [Produces(MediaTypeNames.Application.Json)]
     public class SlackNotificationsController : ControllerBase
     {
-        private readonly IHttpClient _httpClient;
+        private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<SlackNotificationsController> _logger;
-        private readonly IJsonSerializer _serializer;
-        
-        public SlackNotificationsController(ILogger<SlackNotificationsController> logger, IHttpClient httpClient, IJsonSerializer serializer)
+        private readonly JsonSerializerOptions _jsonSerializerOptions;
+
+        public SlackNotificationsController(ILogger<SlackNotificationsController> logger, IHttpClientFactory httpClientFactory)
         {
               _logger = logger;
-              _httpClient = httpClient;
-              _serializer = serializer;
+              _httpClientFactory = httpClientFactory;
+              _jsonSerializerOptions = JsonDefaults.GetOptions();
+
         }
 
         /// <summary>
@@ -54,15 +58,9 @@ namespace Jellyfin.Plugin.Slack.Api
                 parameters.Add("icon_url", options.IconUrl);
             }
 
-            var httpRequest = new HttpRequestOptions
-            {
-                Url = options.WebHookUrl,
-                RequestContent = _serializer.SerializeToString(parameters),
-                RequestContentType = "application/json",
-            };
-
-            await _httpClient.Post(httpRequest).ConfigureAwait(false);
-
+            using var response = await _httpClientFactory.CreateClient(NamedClient.Default)
+                .PostAsJsonAsync(options.WebHookUrl, parameters, _jsonSerializerOptions)
+                .ConfigureAwait(false);
             _logger.LogInformation("Slack test notification sent.");
 
             return NoContent();

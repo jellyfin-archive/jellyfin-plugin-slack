@@ -1,30 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Jellyfin.Plugin.Slack.Configuration;
 using Jellyfin.Data.Entities;
+using MediaBrowser.Common.Json;
 using MediaBrowser.Common.Net;
-using MediaBrowser.Controller.Entities;
 using MediaBrowser.Controller.Notifications;
-using MediaBrowser.Model.Serialization;
 using Microsoft.Extensions.Logging;
-using Microsoft.Net.Http.Headers;
 
 namespace Jellyfin.Plugin.Slack
 {
     public class Notifier : INotificationService
     {
         private readonly ILogger<Notifier> _logger;
-        private readonly IHttpClient _httpClient;
-        private readonly IJsonSerializer _serializer;
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly JsonSerializerOptions _jsonSerializerOptions;
 
-        public Notifier(ILogger<Notifier> logger, IHttpClient httpClient, IJsonSerializer serializer)
+        public Notifier(ILogger<Notifier> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
-            _httpClient = httpClient;
-            _serializer = serializer;
+            _httpClientFactory = httpClientFactory;
+            _jsonSerializerOptions = JsonDefaults.GetOptions();
         }
 
         public bool IsEnabledForUser(User user)
@@ -59,14 +60,10 @@ namespace Jellyfin.Plugin.Slack
             }
 
             _logger.LogDebug("Notification to Slack : {0} - {1}", options.WebHookUrl, request.Description);
-            var httpRequest = new HttpRequestOptions
-            {
-                Url = options.WebHookUrl,
-                RequestContent = _serializer.SerializeToString(parameters),
-                RequestContentType = "application/json",
-            };
 
-            await _httpClient.Post(httpRequest).ConfigureAwait(false);
+            using var response = await _httpClientFactory.CreateClient(NamedClient.Default)
+                .PostAsJsonAsync(options.WebHookUrl, parameters, _jsonSerializerOptions, cancellationToken)
+                .ConfigureAwait(false);
         }
 
         private bool IsValid(SlackConfiguration options)
