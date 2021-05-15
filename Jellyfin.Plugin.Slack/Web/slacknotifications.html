@@ -1,0 +1,49 @@
+<div id="SlackConfigurationPage" data-role="page" class="page type-interior pluginConfigurationPage" data-controller="__plugin/slacknotificationsjs">
+    <div data-role="content">
+        <div class="content-primary">
+            <p>You will need to register a new incoming webhook at https://[yourSlackSite]/apps/manage/custom-integrations to use this plugin.</p>
+            <form class="SlackConfigurationForm">
+                <div style="height: 0; overflow: hidden;">
+                    <input type="text" name="fakeusernameremembered" tabindex="-1"/>
+                    <input type="password" name="fakepasswordremembered" tabindex="-1"/>
+                </div>
+                <div class="selectContainer">
+                    <select is="emby-select" id="selectUser" label="Configure Slack notifications for:"></select>
+                </div>
+                <label class="checkboxContainer">
+                    <input is="emby-checkbox" type="checkbox" id="chkEnableSlack"/>
+                    <span>Enabled</span>
+                </label>
+                <div class="inputContainer">
+                    <input is="emby-input" type="text" id="txtSlackWebhookUrl" required="required" label="Slack Webhook URL:"/>
+                    <div class="fieldDescription">
+                        Webhook URL for Jellyfin
+                    </div>
+                </div>
+                <div class="inputContainer">
+                    <input is="emby-input" type="text" id="txtSlackWebhookUsername" label="Webhook display name:"/>
+                    <div class="fieldDescription">
+                        Optional display name to use for notifications
+                    </div>
+                </div>
+                <div class="inputContainer">
+                    <input is="emby-input" type="text" id="txtSlackWebhookIconUrl" label="Webhook icon URL:"/>
+                    <div class="fieldDescription">
+                        Optional icon URL to use for notifications
+                    </div>
+                </div>
+                <div>
+                    <button is="emby-button" type="button" class="raised button-cancel block" id="testNotification">
+                        <span>Test Notification</span>
+                    </button>
+                </div>
+                <br/>
+                <div>
+                    <button is="emby-button" type="submit" class="raised button-submit block">
+                        <span>Save</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
