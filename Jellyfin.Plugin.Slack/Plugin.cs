@@ -23,8 +23,13 @@ namespace Jellyfin.Plugin.Slack
             {
                 new PluginPageInfo
                 {
-                    Name = Name,
-                    EmbeddedResourcePath = GetType().Namespace + ".Configuration.config.html"
+                    Name = "slacknotifications",
+                    EmbeddedResourcePath = GetType().Namespace + ".Web.slacknotifications.html",
+                },
+                new PluginPageInfo
+                {
+                    Name = "slacknotificationsjs",
+                    EmbeddedResourcePath = GetType().Namespace + ".Web.slacknotifications.js"
                 }
             };
 

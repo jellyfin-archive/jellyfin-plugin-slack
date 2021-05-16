@@ -7,8 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Configuration\config.html" />
-    <EmbeddedResource Include="Configuration\config.html" />
+    <None Remove="Web\slacknotifications.html" />
+    <None Remove="Web\slacknotifications.js" />
+    <EmbeddedResource Include="Web\slacknotifications.html" />
+    <EmbeddedResource Include="Web\slacknotifications.js" />
   </ItemGroup>
 
   <ItemGroup>
