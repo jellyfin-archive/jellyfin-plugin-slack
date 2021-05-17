@@ -82,9 +82,14 @@ export default function (view) {
         const page = this;
 
         ApiClient.getUsers().then(function (users) {
-            page.querySelector('#selectUser').innerHTML = users.map(function (user) {
+            const selUser = page.querySelector('#selectUser');
+            selUser.innerHTML = users.map(function (user) {
                 return '<option value="' + user.Id + '">' + user.Name + '</option>';
             });
+            selUser.dispatchEvent(new Event('change', {
+                bubbles: true,
+                cancelable: false
+            }));
         });
 
         Dashboard.hideLoadingMsg();
