@@ -1,6 +1,7 @@
 ---
 name: "Slack Notifications"
 guid: "94fb77c3-55ad-4c50-bf4e-4e5497467b79"
+imageUrl: "https://repo.jellyfin.org/releases/plugin/images/jellyfin-plugin-slack.png"
 version: "7.0.0.0"
 targetAbi: "10.7.0.0"
 framework: "net5.0"
@@ -10,6 +11,6 @@ description: >
 category: "Notifications"
 owner: "jellyfin"
 artifacts:
-- "Jellyfin.Plugin.Slack.dll"
-changelog: >
+  - "Jellyfin.Plugin.Slack.dll"
+changelog: |
   changelog
